@@ -1,0 +1,1570 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "url": "=https://api.apify.com/v2/datasets/{{ $('Fetch Scraper Run').item.json.data.defaultDatasetId }}/items?token={your_token_here}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        1184,
+        528
+      ],
+      "id": "70f313da-85ac-4413-9aeb-1754168cdc80",
+      "name": "Fetch Scraper Dataset"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.apify.com/v2/key-value-stores/{{ $json.data.defaultKeyValueStoreId }}/records/INPUT?token={your_token_here}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        528,
+        528
+      ],
+      "id": "793f3dd8-e5b4-4793-b1d3-022cfe4a8f42",
+      "name": "Fetch Previous Input Data"
+    },
+    {
+      "parameters": {
+        "base": {
+          "__rl": true,
+          "value": "apphbG3wTU8aVE9V8",
+          "mode": "list",
+          "cachedResultName": "Outreach OS",
+          "cachedResultUrl": "https://airtable.com/apphbG3wTU8aVE9V8"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblZUBCkk4QpdWx88",
+          "mode": "list",
+          "cachedResultName": "Scraping",
+          "cachedResultUrl": "https://airtable.com/apphbG3wTU8aVE9V8/tblZUBCkk4QpdWx88"
+        },
+        "id": "={{ $('Extract Record ID from URL').item.json.recordID }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        960,
+        528
+      ],
+      "id": "81e0752f-a715-4e00-91bf-a5c5a9497fa1",
+      "name": "Get Record"
+    },
+    {
+      "parameters": {
+        "content": "## Scrape | Get from Apify",
+        "height": 360,
+        "width": 2040,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        400
+      ],
+      "id": "a6285053-a3a8-451d-a43e-fb975becab05",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "base": {
+          "__rl": true,
+          "value": "apphbG3wTU8aVE9V8",
+          "mode": "list",
+          "cachedResultName": "Sales OS",
+          "cachedResultUrl": "https://airtable.com/apphbG3wTU8aVE9V8"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblZUBCkk4QpdWx88",
+          "mode": "list",
+          "cachedResultName": "Scraping",
+          "cachedResultUrl": "https://airtable.com/apphbG3wTU8aVE9V8/tblZUBCkk4QpdWx88"
+        },
+        "id": "={{ $json.query.recordID }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        304,
+        128
+      ],
+      "id": "ff68d407-65da-4b0c-b703-676e88d58f55",
+      "name": "Get Record1"
+    },
+    {
+      "parameters": {
+        "content": "## Scrape | Post to Apify",
+        "height": 360,
+        "width": 980
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "01da5412-5fb9-4d5e-9bbd-3f6137a55f91",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst recordIDs = items.map((item) => {\n  const url = item?.json?.webhooks[0]?.requestUrl;\n  const recordID = url.split(\"=\")[1];\n  return { recordID };\n});\nreturn recordIDs;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        752,
+        528
+      ],
+      "id": "1139ad9d-2ea8-49df-974d-e2d32d7c0c7e",
+      "name": "Extract Record ID from URL",
+      "alwaysOutputData": true,
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "content": "## Scrape | Apify Error",
+        "height": 360,
+        "width": 1200,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        800
+      ],
+      "id": "d1064e55-3ccf-4e6d-aff9-d8c16d410f29",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.apify.com/v2/key-value-stores/{{ $json.data.defaultKeyValueStoreId }}/records/INPUT?token={your_token_here}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        528,
+        928
+      ],
+      "id": "0bf74a2a-3a55-4714-937a-0f168cb04dfe",
+      "name": "Fetch Previous Input Data1"
+    },
+    {
+      "parameters": {
+        "jsCode": "const items = $input.all();\nconst recordIDs = items.map((item) => {\n  const url = item?.json?.webhooks[0]?.requestUrl;\n  const recordID = url.split(\"=\")[1];\n  return { recordID };\n});\nreturn recordIDs;\n"
+      },
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        752,
+        928
+      ],
+      "id": "6054b15f-d48a-4a49-8a4a-6e984a3931bb",
+      "name": "Extract Record ID from URL1"
+    },
+    {
+      "parameters": {
+        "path": "1f4580e4-d832-43ca-8859-1fefba81228b",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        80,
+        128
+      ],
+      "id": "37cc61a5-77bb-4be1-a82c-e92e62ea6bd7",
+      "name": "Airtable Trigger",
+      "webhookId": "1f4580e4-d832-43ca-8859-1fefba81228b"
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "apify-callback",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        80,
+        528
+      ],
+      "id": "87d2dee3-b548-4fb9-8f2e-29fd1fbcc398",
+      "name": "Apify Scraper Success",
+      "webhookId": "fef0bf1a-8a4d-4a4c-b122-47c01e09d4ef"
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.apify.com/v2/acts/code_crafter~apollo-io-scraper/runs?waitForFinish=false&token={your_token_here}",
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={\n  \"getPersonalEmails\": false,\n  \"getWorkEmails\": true,\n  \"totalRecords\": {{ $('Set Status \\'In Progress\\'').item.json.fields['Total Records'] }},\n  \"url\": \"{{ $('Get Record1').item.json['Apollo URL'] }}\",\n  \"webhooks\":[{\n    \"eventTypes\": [\"ACTOR.RUN.SUCCEEDED\"],\n      \"requestUrl\": \"https://sprike.app.n8n.cloud/webhook/apify-callback?recordID={{ $('Airtable Trigger').item.json.query.recordID }}\"\n }]\n}\n",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        752,
+        128
+      ],
+      "id": "7454b88b-5daf-4689-b76e-a4f41a112787",
+      "name": "Apify Scraper",
+      "notesInFlow": false
+    },
+    {
+      "parameters": {
+        "url": "=https://api.apify.com/v2/actor-runs/{{ $json.body.resource.id }}?token={your_token_here}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        304,
+        528
+      ],
+      "id": "d96a1942-396e-4394-9af1-888816d650e5",
+      "name": "Fetch Scraper Run"
+    },
+    {
+      "parameters": {
+        "path": "on-failed",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 2,
+      "position": [
+        80,
+        928
+      ],
+      "id": "45d85875-fdb4-44de-a521-10a27a2c94ee",
+      "name": "Apify Scraper Failed",
+      "webhookId": "a2276729-c15e-47e7-bc3d-9208129f5d17"
+    },
+    {
+      "parameters": {
+        "url": "=https://api.apify.com/v2/actor-runs/{{ $json.body.resource.id }}?token={your_token_here}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.2,
+      "position": [
+        304,
+        928
+      ],
+      "id": "6c624b50-1c46-4a85-8c57-57023e3f1eb8",
+      "name": "Fetch Scraper Run1"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "apphbG3wTU8aVE9V8",
+          "mode": "list",
+          "cachedResultName": "Outreach OS",
+          "cachedResultUrl": "https://airtable.com/apphbG3wTU8aVE9V8"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblZUBCkk4QpdWx88",
+          "mode": "list",
+          "cachedResultName": "Scraping",
+          "cachedResultUrl": "https://airtable.com/apphbG3wTU8aVE9V8/tblZUBCkk4QpdWx88"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "Error",
+            "Total Records": 0
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Scrape",
+              "displayName": "Scrape",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "In Setup",
+                  "value": "In Setup"
+                },
+                {
+                  "name": "Scraping in Progress",
+                  "value": "Scraping in Progress"
+                },
+                {
+                  "name": "Scraped",
+                  "value": "Scraped"
+                },
+                {
+                  "name": "Error",
+                  "value": "Error"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Trigger",
+              "displayName": "Trigger",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Last Scraped",
+              "displayName": "Last Scraped",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Campaign",
+              "displayName": "Campaign",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Source",
+              "displayName": "Source",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Apollo URL",
+              "displayName": "Apollo URL",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Total Records",
+              "displayName": "Total Records",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "N8N Webhook – Scrape",
+              "displayName": "N8N Webhook – Scrape",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "# Leads",
+              "displayName": "# Leads",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Leads",
+              "displayName": "Leads",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        960,
+        928
+      ],
+      "id": "59ca7dcb-384c-4c3c-9b9c-ef052062806d",
+      "name": "Set Status 'Error'"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "apphbG3wTU8aVE9V8",
+          "mode": "list",
+          "cachedResultName": "Sales OS",
+          "cachedResultUrl": "https://airtable.com/apphbG3wTU8aVE9V8"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblZUBCkk4QpdWx88",
+          "mode": "list",
+          "cachedResultName": "Scraping",
+          "cachedResultUrl": "https://airtable.com/apphbG3wTU8aVE9V8/tblZUBCkk4QpdWx88"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "id": "={{ $('Get Record1').item.json.id }}",
+            "Status": "Scraping in Progress",
+            "Last Scraped": "={{ $now }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Scrape",
+              "displayName": "Scrape",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "In Setup",
+                  "value": "In Setup"
+                },
+                {
+                  "name": "Scraping in Progress",
+                  "value": "Scraping in Progress"
+                },
+                {
+                  "name": "Scraped",
+                  "value": "Scraped"
+                },
+                {
+                  "name": "Error",
+                  "value": "Error"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Trigger",
+              "displayName": "Trigger",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Last Scraped",
+              "displayName": "Last Scraped",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Campaign",
+              "displayName": "Campaign",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Source",
+              "displayName": "Source",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Apollo URL",
+              "displayName": "Apollo URL",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Total Records",
+              "displayName": "Total Records",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "N8N Webhook – Scrape",
+              "displayName": "N8N Webhook – Scrape",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "# Leads",
+              "displayName": "# Leads",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Leads",
+              "displayName": "Leads",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        528,
+        128
+      ],
+      "id": "45f9f0b4-b1e5-4b63-8d7d-a904e0e73ece",
+      "name": "Set Status 'In Progress'"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "apphbG3wTU8aVE9V8",
+          "mode": "list",
+          "cachedResultName": "Outreach OS",
+          "cachedResultUrl": "https://airtable.com/apphbG3wTU8aVE9V8"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblbXSjf3UibuApuv",
+          "mode": "list",
+          "cachedResultName": "Leads",
+          "cachedResultUrl": "https://airtable.com/apphbG3wTU8aVE9V8/tblbXSjf3UibuApuv"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "First Name": "={{ $json.first_name }}",
+            "Last Name": "={{ $json.last_name }}",
+            "Company": "={{ $json.organization.name }}",
+            "Email": "={{ $json.email }}",
+            "Website": "={{ $json.organization.website_url }}",
+            "Outreach Status": "New",
+            "LinkedIn (Company)": "={{ $json.organization_linkedin_url }}",
+            "LinkedIn (Personal)": "={{ $json.linkedin_url }}",
+            "Campaign": "={{ [$('Get Record').item.json.Campaign[0]] }}",
+            "Scrape": "={{ [$('Get Record').item.json.id] }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Full name",
+              "displayName": "Full name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Company",
+              "displayName": "Company",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Website",
+              "displayName": "Website",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Outreach Status",
+              "displayName": "Outreach Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "New",
+                  "value": "New"
+                },
+                {
+                  "name": "Enriched",
+                  "value": "Enriched"
+                },
+                {
+                  "name": "Personalized",
+                  "value": "Personalized"
+                },
+                {
+                  "name": "Outreach – Email",
+                  "value": "Outreach – Email"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "LinkedIn (Company)",
+              "displayName": "LinkedIn (Company)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "LinkedIn (Personal)",
+              "displayName": "LinkedIn (Personal)",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Outreach Email",
+              "displayName": "Outreach Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Campaign",
+              "displayName": "Campaign",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Source",
+              "displayName": "Source",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Scrape",
+              "displayName": "Scrape",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Smartlead Campaign ID",
+              "displayName": "Smartlead Campaign ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "OOS Campaign ID",
+              "displayName": "OOS Campaign ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "N8N Webhook – Personalize",
+              "displayName": "N8N Webhook – Personalize",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Thread",
+              "displayName": "Thread",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Manual Reply",
+              "displayName": "Manual Reply",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Smartlead Master Inbox",
+              "displayName": "Smartlead Master Inbox",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Reply Status",
+              "displayName": "Reply Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "More Info",
+                  "value": "More Info"
+                },
+                {
+                  "name": "Schedule Meeting",
+                  "value": "Schedule Meeting"
+                },
+                {
+                  "name": "Meeting Booked",
+                  "value": "Meeting Booked"
+                },
+                {
+                  "name": "Unsubscribe",
+                  "value": "Unsubscribe"
+                },
+                {
+                  "name": "OOO",
+                  "value": "OOO"
+                },
+                {
+                  "name": "NLWH",
+                  "value": "NLWH"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Needs Reply",
+              "displayName": "Needs Reply",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "boolean",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Last Lead Response",
+              "displayName": "Last Lead Response",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Last Team Response",
+              "displayName": "Last Team Response",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Smartlead Lead ID",
+              "displayName": "Smartlead Lead ID",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Open in Smartlead",
+              "displayName": "Open in Smartlead",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1408,
+        528
+      ],
+      "id": "f95d482f-1eca-4e3f-ad86-16e5c6edd952",
+      "name": "Create Lead"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "apphbG3wTU8aVE9V8",
+          "mode": "list",
+          "cachedResultName": "Sales OS",
+          "cachedResultUrl": "https://airtable.com/apphbG3wTU8aVE9V8"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tblZUBCkk4QpdWx88",
+          "mode": "list",
+          "cachedResultName": "Scraping",
+          "cachedResultUrl": "https://airtable.com/apphbG3wTU8aVE9V8/tblZUBCkk4QpdWx88"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "Scraped",
+            "id": "={{ $('Get Record').item.json.id }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Scrape",
+              "displayName": "Scrape",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "In Setup",
+                  "value": "In Setup"
+                },
+                {
+                  "name": "Scraping in Progress",
+                  "value": "Scraping in Progress"
+                },
+                {
+                  "name": "Scraped",
+                  "value": "Scraped"
+                },
+                {
+                  "name": "Error",
+                  "value": "Error"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Trigger",
+              "displayName": "Trigger",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Last Scraped",
+              "displayName": "Last Scraped",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "dateTime",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Campaign",
+              "displayName": "Campaign",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Source",
+              "displayName": "Source",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Apollo URL",
+              "displayName": "Apollo URL",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Total Records",
+              "displayName": "Total Records",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "N8N Webhook – Scrape",
+              "displayName": "N8N Webhook – Scrape",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "# Leads",
+              "displayName": "# Leads",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Leads",
+              "displayName": "Leads",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        1792,
+        528
+      ],
+      "id": "0c3e76c5-62c0-4428-9c1e-e9b6624b6148",
+      "name": "Set Status 'Scraped'"
+    },
+    {
+      "parameters": {},
+      "type": "n8n-nodes-base.limit",
+      "typeVersion": 1,
+      "position": [
+        1600,
+        528
+      ],
+      "id": "fc11b1b0-8a86-4711-8bea-67a994032a4d",
+      "name": "Limit"
+    }
+  ],
+  "connections": {
+    "Fetch Scraper Dataset": {
+      "main": [
+        [
+          {
+            "node": "Create Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Previous Input Data": {
+      "main": [
+        [
+          {
+            "node": "Extract Record ID from URL",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Record": {
+      "main": [
+        [
+          {
+            "node": "Fetch Scraper Dataset",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Record1": {
+      "main": [
+        [
+          {
+            "node": "Set Status 'In Progress'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Record ID from URL": {
+      "main": [
+        [
+          {
+            "node": "Get Record",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Previous Input Data1": {
+      "main": [
+        [
+          {
+            "node": "Extract Record ID from URL1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Extract Record ID from URL1": {
+      "main": [
+        [
+          {
+            "node": "Set Status 'Error'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable Trigger": {
+      "main": [
+        [
+          {
+            "node": "Get Record1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apify Scraper Success": {
+      "main": [
+        [
+          {
+            "node": "Fetch Scraper Run",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Scraper Run": {
+      "main": [
+        [
+          {
+            "node": "Fetch Previous Input Data",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Apify Scraper Failed": {
+      "main": [
+        [
+          {
+            "node": "Fetch Scraper Run1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Fetch Scraper Run1": {
+      "main": [
+        [
+          {
+            "node": "Fetch Previous Input Data1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Set Status 'In Progress'": {
+      "main": [
+        [
+          {
+            "node": "Apify Scraper",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create Lead": {
+      "main": [
+        [
+          {
+            "node": "Limit",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Limit": {
+      "main": [
+        [
+          {
+            "node": "Set Status 'Scraped'",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {
+    "Airtable Trigger": [
+      {
+        "headers": {
+          "host": "sprike.app.n8n.cloud",
+          "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/134.0.0.0 Safari/537.36",
+          "accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7",
+          "accept-encoding": "gzip, br",
+          "accept-language": "en-US,en;q=0.9,de;q=0.8",
+          "cdn-loop": "cloudflare; loops=1; subreqs=1",
+          "cf-connecting-ip": "31.153.82.245",
+          "cf-ew-via": "15",
+          "cf-ipcountry": "CY",
+          "cf-ray": "9214978745f1d624-LCA",
+          "cf-visitor": "{\"scheme\":\"https\"}",
+          "cf-worker": "n8n.cloud",
+          "cookie": "rl_page_init_referrer=RudderEncrypt%3AU2FsdGVkX18Mp3fqlpQFqYpWtlDNuWrXN4cR7yiuKMAIgjQLY%2FdJDZaM5OqNuxIp; rl_page_init_referring_domain=RudderEncrypt%3AU2FsdGVkX18pNCP1nncAg7pHSFsqtrKJspdma%2FZ%2Fk8U%3D; n8n-auth=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImI4OWMwM2Y0LWU3MmEtNDk2MC1iNjVmLTc2MDIyMjk4M2I2NCIsImhhc2giOiJVWVgyKzBYaVptIiwiYnJvd3NlcklkIjoic0JlbVhPRlFTZkNoUG85Rk5oQUIwbzlYYXkzK1BlQUYxYW1hMStEd1lQRT0iLCJpYXQiOjE3NDE4MTk4ODQsImV4cCI6MTc0MjQyNDY4NH0.Z0bzpcqsizlgDChDUKlUBjTtw42UVoI9_Q_y7k25wiU; rl_anonymous_id=RudderEncrypt%3AU2FsdGVkX1%2Bphh3Zsgm7Pnw%2BqYUibOtdyIux%2BdhRuh9gCRa1eO%2BtzPt%2FHaInh17qqR%2BTA7fRXHxlajqf2mB7HA%3D%3D; rl_user_id=RudderEncrypt%3AU2FsdGVkX1%2FKWAHbP0XkXHiCFXMN%2FQnIGs0MSswAhAiR6kZLbhabFju0TWs2Qwk5zgWn2lrhXIvUEvu73VdJBaWSJWwH4hjylXcaZslBp0nh8gPGjtXXWaALuQNVt0%2FUkW8%2BuHq31AidUAXI37cAp2h7kXZ3mQ%2BQDUzGNc7mAME%3D; rl_trait=RudderEncrypt%3AU2FsdGVkX19hosiCsMS%2FoI%2FiVUKEFFeQgaJWyedKR78oZtOsl2H5po9M9xqDvGxpQnC7t%2FGPRNjsFzqzyPxiuBft8Su1O8GvEll7sJx%2FQ6WXM9Hb8TlE7AGwX1MZX%2F0gzex3CwCepAHDKSDB%2F4xP8v5EEIvFv1%2F9M1mNNZtq958%3D; n8n_anonymous_id=d3d0827e-165f-445b-8eb2-583d0a581950; rl_session=RudderEncrypt%3AU2FsdGVkX1%2FBo8DcOiZ1apzvZVRhEW6NQiFNcwppJ%2BdHzq%2FwozRvPHDMWHfowXeA4924JEqRELmUSP0lTkmyRsPRH7c7z%2FzL3Gv%2Bp7FliVAFceQrfHs6NgwKwnvJQiC0m4t6ghXf%2BqhcUMHjV3UKqg%3D%3D; ph_phc_4URIAm1uYfJO7j8kWSe0J8lc8IqnstRLS7Jx8NcakHo_posthog=%7B%22distinct_id%22%3A%2211054c7d38d935dfd0aa582dbf1ba2b718c25037fdbfb796898b544750a1c551%23b89c03f4-e72a-4960-b65f-760222983b64%22%2C%22%24sesid%22%3A%5B1742131524831%2C%2201959ebc-e43c-72e1-b611-425a62e686cc%22%2C1742124934204%5D%2C%22%24epp%22%3Atrue%2C%22%24initial_person_info%22%3A%7B%22r%22%3A%22%24direct%22%2C%22u%22%3A%22https%3A%2F%2Fsprike.app.n8n.cloud%2Fworkflows%22%7D%7D",
+          "dnt": "1",
+          "priority": "u=0, i",
+          "sec-ch-ua": "\"Not:A-Brand\";v=\"24\", \"Chromium\";v=\"134\"",
+          "sec-ch-ua-mobile": "?0",
+          "sec-ch-ua-platform": "\"macOS\"",
+          "sec-fetch-dest": "document",
+          "sec-fetch-mode": "navigate",
+          "sec-fetch-site": "cross-site",
+          "sec-fetch-user": "?1",
+          "upgrade-insecure-requests": "1",
+          "x-forwarded-for": "31.153.82.245, 172.68.130.154",
+          "x-forwarded-host": "sprike.app.n8n.cloud",
+          "x-forwarded-port": "443",
+          "x-forwarded-proto": "https",
+          "x-forwarded-server": "traefik-prod-users-gwc-12-5464cc7f77-wbkns",
+          "x-is-trusted": "yes",
+          "x-real-ip": "31.153.82.245"
+        },
+        "params": {},
+        "query": {
+          "recordID": "recmJLzhgFud7L6kd"
+        },
+        "body": {},
+        "webhookUrl": "https://sprike.app.n8n.cloud/webhook/1f4580e4-d832-43ca-8859-1fefba81228b",
+        "executionMode": "production"
+      }
+    ],
+    "Apify Scraper Success": [
+      {
+        "headers": {
+          "host": "sprike.app.n8n.cloud",
+          "user-agent": "axios/1.7.9",
+          "content-length": "2707",
+          "accept": "application/json, text/plain, */*",
+          "accept-encoding": "gzip, br",
+          "cdn-loop": "cloudflare; loops=1; subreqs=1",
+          "cf-connecting-ip": "34.224.107.31",
+          "cf-ew-via": "15",
+          "cf-ipcountry": "US",
+          "cf-ray": "9214c752a5c8289e-IAD",
+          "cf-visitor": "{\"scheme\":\"https\"}",
+          "cf-worker": "n8n.cloud",
+          "content-type": "application/json",
+          "x-apify-request-origin": "WEBHOOK",
+          "x-apify-webhook": "yo",
+          "x-apify-webhook-dispatch-id": "KgfLbjAcSZWw0xRnJ",
+          "x-apify-workflow-key": "bivuwjv5415b",
+          "x-forwarded-for": "34.224.107.31, 172.70.42.112",
+          "x-forwarded-host": "sprike.app.n8n.cloud",
+          "x-forwarded-port": "443",
+          "x-forwarded-proto": "https",
+          "x-forwarded-server": "traefik-prod-users-gwc-12-5464cc7f77-wbkns",
+          "x-is-trusted": "yes",
+          "x-real-ip": "34.224.107.31"
+        },
+        "params": {},
+        "query": {},
+        "body": {
+          "userId": "992RWpPnVbvy8VuHu",
+          "createdAt": "2025-03-16T14:00:45.125Z",
+          "eventType": "ACTOR.RUN.SUCCEEDED",
+          "eventData": {
+            "actorId": "jljBwyyQakqrL1wae",
+            "actorRunId": "D6Q3dfl3Qca1WtaQs"
+          },
+          "resource": {
+            "id": "D6Q3dfl3Qca1WtaQs",
+            "actId": "jljBwyyQakqrL1wae",
+            "userId": "992RWpPnVbvy8VuHu",
+            "startedAt": "2025-03-16T13:58:13.324Z",
+            "finishedAt": "2025-03-16T14:00:39.049Z",
+            "status": "SUCCEEDED",
+            "meta": {
+              "origin": "API",
+              "userAgent": "axios/1.7.4"
+            },
+            "stats": {
+              "inputBodyLen": 1611,
+              "rebootCount": 0,
+              "restartCount": 0,
+              "durationMillis": 145565,
+              "resurrectCount": 0,
+              "runTimeSecs": 145.565,
+              "metamorph": 0,
+              "computeUnits": 0.02021736111111111,
+              "memAvgBytes": 77664140.89169897,
+              "memMaxBytes": 90079232,
+              "memCurrentBytes": 0,
+              "cpuAvgUsage": 8.188963018547469,
+              "cpuMaxUsage": 109.43970443349752,
+              "cpuCurrentUsage": 0,
+              "netRxBytes": 6230006,
+              "netTxBytes": 5706549
+            },
+            "options": {
+              "build": "latest",
+              "timeoutSecs": 0,
+              "memoryMbytes": 512,
+              "maxItems": 8110,
+              "diskMbytes": 1024
+            },
+            "createdByOrganizationMemberUserId": "HIE6ofVy2scuTE1K9",
+            "buildId": "AF0UNdltimi4yaZLa",
+            "exitCode": 0,
+            "defaultKeyValueStoreId": "Ep4gbRwYJwhhTukRI",
+            "defaultDatasetId": "NxEN5ibkLMeqDRj0N",
+            "defaultRequestQueueId": "H3iqoWTAbjD2p51dD",
+            "pricingInfo": {
+              "pricingModel": "PRICE_PER_DATASET_ITEM",
+              "reasonForChange": "The price is increasing to cover the research and development necessary for improving\nActor performance.",
+              "startedAt": "2024-12-09T18:28:50.404Z",
+              "pricePerUnitUsd": 0.0012,
+              "unitName": "leads",
+              "createdAt": "2024-11-25T18:29:45.628Z",
+              "apifyMarginPercentage": 0.2,
+              "notifiedAboutFutureChangeAt": "2024-11-25T18:30:15.502Z",
+              "notifiedAboutChangeAt": "2024-12-09T18:39:18.387Z"
+            },
+            "buildNumber": "0.0.101",
+            "containerUrl": "https://myndgnd4vv7e.runs.apify.net",
+            "usage": {
+              "ACTOR_COMPUTE_UNITS": 0.02021736111111111,
+              "DATASET_READS": 0,
+              "DATASET_WRITES": 500,
+              "KEY_VALUE_STORE_READS": 1,
+              "KEY_VALUE_STORE_WRITES": 25,
+              "KEY_VALUE_STORE_LISTS": 0,
+              "REQUEST_QUEUE_READS": 0,
+              "REQUEST_QUEUE_WRITES": 0,
+              "DATA_TRANSFER_INTERNAL_GBYTES": 0.0004648994654417038,
+              "DATA_TRANSFER_EXTERNAL_GBYTES": 0.004910812713205814,
+              "PROXY_RESIDENTIAL_TRANSFER_GBYTES": 0,
+              "PROXY_SERPS": 0
+            },
+            "usageTotalUsd": 0.01284735196035769,
+            "usageUsd": {
+              "ACTOR_COMPUTE_UNITS": 0.008086944444444443,
+              "DATASET_READS": 0,
+              "DATASET_WRITES": 0.0025,
+              "KEY_VALUE_STORE_READS": 0.000005,
+              "KEY_VALUE_STORE_WRITES": 0.00125,
+              "KEY_VALUE_STORE_LISTS": 0,
+              "REQUEST_QUEUE_READS": 0,
+              "REQUEST_QUEUE_WRITES": 0,
+              "DATA_TRANSFER_INTERNAL_GBYTES": 0.000023244973272085192,
+              "DATA_TRANSFER_EXTERNAL_GBYTES": 0.0009821625426411629,
+              "PROXY_RESIDENTIAL_TRANSFER_GBYTES": 0,
+              "PROXY_SERPS": 0
+            },
+            "links": {
+              "publicRunUrl": "https://console.apify.com/view/runs/D6Q3dfl3Qca1WtaQs",
+              "consoleRunUrl": "https://console.apify.com/actors/jljBwyyQakqrL1wae/runs/D6Q3dfl3Qca1WtaQs",
+              "apiRunUrl": "https://api.apify.com/v2/actor-runs/D6Q3dfl3Qca1WtaQs"
+            }
+          }
+        },
+        "webhookUrl": "https://sprike.app.n8n.cloud/webhook/apify-callback",
+        "executionMode": "production"
+      }
+    ]
+  },
+  "meta": {
+    "instanceId": "20cf75cd0417fe5be3c3d8dcf7163bcd4dd5f0947193527bf3d55f850ac76577"
+  }
+}
