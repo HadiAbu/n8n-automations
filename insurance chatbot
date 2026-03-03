@@ -1,0 +1,2182 @@
+{
+  "nodes": [
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.message.content.response_type }}",
+                    "rightValue": "more_info",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "d3e92123-f2d3-4544-81ad-dc4509927e82"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "More_Info"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "b4e61d4e-cef4-4f8d-8e12-46bfe51d3d2c",
+                    "leftValue": "={{ $json.message.content.response_type }}",
+                    "rightValue": "greeting",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Greeting"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "d184a1c4-f4a9-4abd-88ef-55b35f49283f",
+                    "leftValue": "={{ $json.message.content.response_type }}",
+                    "rightValue": "enrich",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Enrich"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "6764b2f3-0b46-42b8-9f00-17a155d1989e",
+                    "leftValue": "={{ $json.message.content.response_type }}",
+                    "rightValue": "appointment",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Appointment"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "a79e47ec-9eeb-4fa9-8124-ba6c7bb74fda",
+                    "leftValue": "={{ $json.message.content.response_type }}",
+                    "rightValue": "objection",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Objection"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 2
+                },
+                "conditions": [
+                  {
+                    "id": "5af48321-a36a-473a-9678-2b5172934648",
+                    "leftValue": "={{ $json.message.content.response_type }}",
+                    "rightValue": "unclear",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals",
+                      "name": "filter.operator.equals"
+                    }
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Unclear"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.2,
+      "position": [
+        -848,
+        704
+      ],
+      "id": "71d4ddfa-5e7e-4587-b7fc-76effdd607c3",
+      "name": "Switch"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "message"
+        ],
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.telegramTrigger",
+      "typeVersion": 1.1,
+      "position": [
+        -2880,
+        928
+      ],
+      "id": "a1961331-81f5-4a35-863b-6b7a9b70f537",
+      "name": "First Message",
+      "webhookId": "bee1d884-ba17-4da5-a040-1b187df6ba41"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('First Message').item.json.message.chat.id }}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        144,
+        1552
+      ],
+      "id": "39f729c6-b5dd-4792-8093-be9231c92df8",
+      "name": "Simple Memory1"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        64,
+        1424
+      ],
+      "id": "d2383bc4-802e-4eb9-8faa-e86c960aaca4",
+      "name": "OpenAI Chat Model1"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('First Message').item.json.message.chat.id }}",
+        "text": "=I apologize {{ $('New Lead Responded?').item.json['First Name'] }}, but I do not understand, Could you clarify what you mean by that?",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -416,
+        1184
+      ],
+      "id": "55192be4-0e41-4b7a-bdff-a0e5ab597464",
+      "name": "Ask for clarification",
+      "webhookId": "44a94112-95ed-4d2e-af85-b73afb6992ef"
+    },
+    {
+      "parameters": {
+        "base": {
+          "__rl": true,
+          "value": "appc4QlJGzjsbRpRw",
+          "mode": "list",
+          "cachedResultName": "Loic Table",
+          "cachedResultUrl": "https://airtable.com/appc4QlJGzjsbRpRw"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbldSiL36zjGDTuXW",
+          "mode": "list",
+          "cachedResultName": "Clients",
+          "cachedResultUrl": "https://airtable.com/appc4QlJGzjsbRpRw/tbldSiL36zjGDTuXW"
+        },
+        "id": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Record_ID', ``, 'string') }}",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        448,
+        1440
+      ],
+      "id": "cb153097-1653-4ba7-8469-6a2352454665",
+      "name": "Get client first name"
+    },
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "list",
+          "value": "gpt-4o-mini"
+        },
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.2,
+      "position": [
+        0,
+        912
+      ],
+      "id": "fe4188a9-f816-4470-aa36-f5bccddf4392",
+      "name": "OpenAI Chat Model2"
+    },
+    {
+      "parameters": {
+        "chatId": "595642976",
+        "text": "={{ $json.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        480,
+        1184
+      ],
+      "id": "8101d230-ef75-426c-90dc-272d0b7b71a3",
+      "name": "Telegram1",
+      "webhookId": "460efb75-144a-4939-92a9-cbbb90d216a4"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('First Message').first().json.message.chat.id }}",
+        "contextWindowLength": 10
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        144,
+        928
+      ],
+      "id": "42693d7f-99c6-4617-89f3-b09416f7cde5",
+      "name": "Simple Memory"
+    },
+    {
+      "parameters": {
+        "calendar": {
+          "__rl": true,
+          "mode": "list",
+          "value": ""
+        },
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.googleCalendarTool",
+      "typeVersion": 1.3,
+      "position": [
+        304,
+        928
+      ],
+      "id": "0e871248-1b86-4655-b330-31108f19176b",
+      "name": "Google Calendar",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "chatId": "595642976",
+        "text": "📢 Get in Touch with Coben Assurances!\n\nGot questions? Need assistance? We’re here to help! 😊\n\n📍 Address: 14 rue Davoust, 93 500 Pantin\n📞 Phone: 01 84 80 77 01\n💬 WhatsApp: 07 45 89 62 29\n📧 Email: contact@coben-assurances.com\n🌍 Website: www.coben-assurances.fr\n📅 Schedule a Call: [Calendly link – Coming soon!]\n\nSee the full guide at:\nhttps://drive.google.com/file/d/1PhItK3eYRmz7Jbg3JMk7udQhFSkUw1om/view?usp=drive_link\n\nFeel free to reach out—we’d love to hear from you! 🚀",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -528,
+        32
+      ],
+      "id": "44214ece-df6f-4076-af10-2b9771018dbc",
+      "name": "Send Contact Info",
+      "webhookId": "460efb75-144a-4939-92a9-cbbb90d216a4"
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appc4QlJGzjsbRpRw",
+          "mode": "list",
+          "cachedResultName": "Loic Table",
+          "cachedResultUrl": "https://airtable.com/appc4QlJGzjsbRpRw"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbldSiL36zjGDTuXW",
+          "mode": "list",
+          "cachedResultName": "Clients",
+          "cachedResultUrl": "https://airtable.com/appc4QlJGzjsbRpRw/tbldSiL36zjGDTuXW"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "First Name": "={{ $('First Message').item.json.message.from.first_name }}",
+            "Status": "New",
+            "Age": 0,
+            "Phone": "0525833877"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Job",
+              "displayName": "Job",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "New",
+                  "value": "New"
+                },
+                {
+                  "name": "Not Interested",
+                  "value": "Not Interested"
+                },
+                {
+                  "name": "Follow-up",
+                  "value": "Follow-up"
+                },
+                {
+                  "name": "Booked",
+                  "value": "Booked"
+                },
+                {
+                  "name": "Done",
+                  "value": "Done"
+                },
+                {
+                  "name": "Enriched",
+                  "value": "Enriched"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Age",
+              "displayName": "Age",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Memory",
+              "displayName": "Memory",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Created",
+              "displayName": "Created",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -1936,
+        1088
+      ],
+      "id": "311904e8-f5c9-4f0b-b2ea-9ed230cf36b5",
+      "name": "Create New Lead"
+    },
+    {
+      "parameters": {
+        "chatId": "595642976",
+        "text": "=Hello {{$('First Message').item.json.message.chat.first_name}}, I’m Coben from Coben Assurances. Thank you for reaching out to us. I’m here to help you optimize your borrower insurance. We will review your current contract to see if we can find coverage better suited to your situation.",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1440,
+        1008
+      ],
+      "id": "eb449a2c-0d8d-472a-afe6-9e5998cc342c",
+      "name": "Send First Welcome Message1",
+      "webhookId": "460efb75-144a-4939-92a9-cbbb90d216a4"
+    },
+    {
+      "parameters": {
+        "content": "## New Lead\nFirst time interaction with Bot, data will be added to airtable with status NEW\n\n*need to update fields",
+        "height": 320,
+        "width": 780
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2016,
+        944
+      ],
+      "id": "de684841-0504-46f5-9a78-eb7392eda126",
+      "name": "Sticky Note"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appc4QlJGzjsbRpRw",
+          "mode": "list",
+          "cachedResultName": "Loic Table",
+          "cachedResultUrl": "https://airtable.com/appc4QlJGzjsbRpRw"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbldSiL36zjGDTuXW",
+          "mode": "list",
+          "cachedResultName": "Clients",
+          "cachedResultUrl": "https://airtable.com/appc4QlJGzjsbRpRw/tbldSiL36zjGDTuXW"
+        },
+        "filterByFormula": "={First Name} = \"{{$('First Message').item.json.message.from.first_name}}\"",
+        "returnAll": false,
+        "limit": 10,
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        288,
+        1504
+      ],
+      "id": "f97974cc-0382-4412-b7c5-861a7064554a",
+      "name": "Airtable3"
+    },
+    {
+      "parameters": {
+        "modelId": {
+          "__rl": true,
+          "value": "gpt-4o",
+          "mode": "list",
+          "cachedResultName": "GPT-4O"
+        },
+        "messages": {
+          "values": [
+            {
+              "content": "=These are the past messages sent by the user:\n {{ $('Aggregate').item.json.data.toJsonString() }}",
+              "role": "system"
+            },
+            {
+              "content": "={{ $json.fields.Memories }}"
+            },
+            {
+              "content": "=Identify what the user needs:\n\n- Initial Contact - Introduction and Information Gathering: message would be hello, hey,.. => response_type: greeting\n\n- User provides information about themselves: related to insurance, bank details, mortage, age, company, job, email, health => response_type: enrich\n\n- Information Gathering: user asks for information.  => response_type: more_info\n\n- Objection Handling and Nurturing: user is responding is such ways: “I don’t have time.\",“I’m already insured elsewhere.”,“It’s too expensive.”  => response_type: objection\n\n- Appointment Scheduling or Final Conversion: Once the prospect is receptive, and interested in  => response_type: appointment\n\nif none of the above => response_type: unclear.\n\nConsider previous conversations to understand which stage the user is in: {{ $('Aggregate').item.json.data.toJsonString() }}",
+              "role": "system"
+            }
+          ]
+        },
+        "jsonOutput": true,
+        "options": {}
+      },
+      "type": "@n8n/n8n-nodes-langchain.openAi",
+      "typeVersion": 1.8,
+      "position": [
+        -1200,
+        784
+      ],
+      "id": "a563ef7f-5afb-4e31-a6a6-a2f9e18e7bd6",
+      "name": "Categorize message"
+    },
+    {
+      "parameters": {
+        "chatId": "595642976",
+        "text": "=Hello {{ $('New Lead Responded?').item.json['First Name'] }}, I’m Coben from Coben Assurances. Thank you for reaching out to us. I’m here to help you optimize your borrower insurance. How can I help?\n\nSee the full guide at:\nhttps://drive.google.com/file/d/1PhItK3eYRmz7Jbg3JMk7udQhFSkUw1om/view?usp=drive_link",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -464,
+        272
+      ],
+      "id": "842a1714-a665-4a0b-ac3a-f811048ff13d",
+      "name": "Send Greeting For Existing Leads",
+      "webhookId": "460efb75-144a-4939-92a9-cbbb90d216a4"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appc4QlJGzjsbRpRw",
+          "mode": "list",
+          "cachedResultName": "Loic Table",
+          "cachedResultUrl": "https://airtable.com/appc4QlJGzjsbRpRw"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbly9s2AvvazNTPBc",
+          "mode": "list",
+          "cachedResultName": "Memories",
+          "cachedResultUrl": "https://airtable.com/appc4QlJGzjsbRpRw/tbly9s2AvvazNTPBc"
+        },
+        "filterByFormula": "=Client = \"{{ $('Search Existing Client').item.json.Phone }}\"",
+        "options": {
+          "fields": [
+            "Memories"
+          ]
+        }
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -1936,
+        720
+      ],
+      "id": "e01faead-2f9c-4fb0-a1ba-85e42eaa2049",
+      "name": "Get Memories",
+      "alwaysOutputData": true,
+      "executeOnce": true
+    },
+    {
+      "parameters": {
+        "aggregate": "aggregateAllItemData",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.aggregate",
+      "typeVersion": 1,
+      "position": [
+        -1728,
+        720
+      ],
+      "id": "6cd3be2f-23a3-4d8e-8c08-b3daab39b182",
+      "name": "Aggregate"
+    },
+    {
+      "parameters": {
+        "content": "## Fetch Previous Conversations with client\n\n*Needs to be updated to use phone number instead of name",
+        "height": 320,
+        "width": 680,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2016,
+        592
+      ],
+      "id": "74119674-8baf-484c-886a-24405bd8f510",
+      "name": "Sticky Note1"
+    },
+    {
+      "parameters": {
+        "sessionIdType": "customKey",
+        "sessionKey": "={{ $('First Message').first().json.message.chat.id }}",
+        "contextWindowLength": 50
+      },
+      "type": "@n8n/n8n-nodes-langchain.memoryBufferWindow",
+      "typeVersion": 1.3,
+      "position": [
+        240,
+        464
+      ],
+      "id": "a102b62c-e51c-4f5e-995a-b3a012090ab2",
+      "name": "Window Buffer Memory"
+    },
+    {
+      "parameters": {
+        "options": {}
+      },
+      "id": "de3717cf-ddf9-47ea-9879-b116216e88a1",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1,
+      "position": [
+        112,
+        464
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appc4QlJGzjsbRpRw",
+          "mode": "list",
+          "cachedResultName": "Loic Table",
+          "cachedResultUrl": "https://airtable.com/appc4QlJGzjsbRpRw"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbly9s2AvvazNTPBc",
+          "mode": "list",
+          "cachedResultName": "Memories",
+          "cachedResultUrl": "https://airtable.com/appc4QlJGzjsbRpRw/tbly9s2AvvazNTPBc"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Client": "={{ [$('Search Existing Client').item.json.id] }}",
+            "Memories": "={{ $('First Message').item.json.message.text }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Memories",
+              "displayName": "Memories",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Client",
+              "displayName": "Client",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -1504,
+        720
+      ],
+      "id": "a1424011-0ecc-4f22-9053-49bc0f84c966",
+      "name": "Upload Last Message"
+    },
+    {
+      "parameters": {
+        "operation": "search",
+        "base": {
+          "__rl": true,
+          "value": "appc4QlJGzjsbRpRw",
+          "mode": "list",
+          "cachedResultName": "Loic Table",
+          "cachedResultUrl": "https://airtable.com/appc4QlJGzjsbRpRw"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbldSiL36zjGDTuXW",
+          "mode": "list",
+          "cachedResultName": "Clients",
+          "cachedResultUrl": "https://airtable.com/appc4QlJGzjsbRpRw/tbldSiL36zjGDTuXW"
+        },
+        "filterByFormula": "={First Name} =  \"{{ $json.message.from.first_name }}\"",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -2656,
+        928
+      ],
+      "id": "9c3fa7a4-018e-45bb-bc78-ba380f9b1c34",
+      "name": "Search Existing Client",
+      "alwaysOutputData": true
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appc4QlJGzjsbRpRw",
+          "mode": "list",
+          "cachedResultName": "Loic Table",
+          "cachedResultUrl": "https://airtable.com/appc4QlJGzjsbRpRw"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbldSiL36zjGDTuXW",
+          "mode": "list",
+          "cachedResultName": "Clients",
+          "cachedResultUrl": "https://airtable.com/appc4QlJGzjsbRpRw/tbldSiL36zjGDTuXW"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "Engaged",
+            "id": "={{ $('New Lead Responded?').item.json.id }}",
+            "Age": 0
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Job",
+              "displayName": "Job",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "New",
+                  "value": "New"
+                },
+                {
+                  "name": "Not Interested",
+                  "value": "Not Interested"
+                },
+                {
+                  "name": "Follow-up",
+                  "value": "Follow-up"
+                },
+                {
+                  "name": "Booked",
+                  "value": "Booked"
+                },
+                {
+                  "name": "Done",
+                  "value": "Done"
+                },
+                {
+                  "name": "Enriched",
+                  "value": "Enriched"
+                },
+                {
+                  "name": "Engaged",
+                  "value": "Engaged"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Age",
+              "displayName": "Age",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Memory",
+              "displayName": "Memory",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Created",
+              "displayName": "Created",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -1696,
+        384
+      ],
+      "id": "a28c6f15-a6c2-4a23-8345-cd6f993aa9be",
+      "name": "Engaged Lead Status"
+    },
+    {
+      "parameters": {
+        "chatId": "595642976",
+        "text": "To begin, could you tell me how long you've had your mortgage and with which company or bank are you currently insured?",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        -1920,
+        384
+      ],
+      "id": "491c26a3-c01a-4e71-95bf-4091e5d60952",
+      "name": "Send Second Welcome Message",
+      "webhookId": "460efb75-144a-4939-92a9-cbbb90d216a4"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "700e5c1a-1847-46f2-8ea0-4cea8b0e2e69",
+              "leftValue": "={{ $json.Status }}",
+              "rightValue": "New",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -2240,
+        768
+      ],
+      "id": "187ac72f-8fcf-4ecf-b9a9-e8dab306eda0",
+      "name": "New Lead Responded?"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ff5d4dc2-99ec-4ca6-9a0e-66af7ff87fc5",
+              "leftValue": "={{ $json.id }}",
+              "rightValue": "",
+              "operator": {
+                "type": "string",
+                "operation": "exists",
+                "singleValue": true
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        -2448,
+        928
+      ],
+      "id": "ac7d18ef-0171-420c-b95d-d657d7f166b8",
+      "name": "Exists?"
+    },
+    {
+      "parameters": {
+        "content": "## New Lead Responds to First Message (Engages)",
+        "height": 260,
+        "width": 560,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -2016,
+        304
+      ],
+      "id": "af55d16a-fdff-447e-a8e7-ac0356f7f99f",
+      "name": "Sticky Note2"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Upload Last Message').item.json.fields.Memories }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "=# ROLE\nyou will save the client's answers in airtable.\nIf imporatnt details are missing (Age, Job, mortgage, bank) ask for more information, otherwise, update status in airtable to \"Enriched\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.7,
+      "position": [
+        160,
+        240
+      ],
+      "id": "718a133c-8dd5-452a-b3ce-5558660ce769",
+      "name": "Enrichment Agent",
+      "alwaysOutputData": false
+    },
+    {
+      "parameters": {
+        "operation": "create",
+        "base": {
+          "__rl": true,
+          "value": "appc4QlJGzjsbRpRw",
+          "mode": "list",
+          "cachedResultName": "Loic Table",
+          "cachedResultUrl": "https://airtable.com/appc4QlJGzjsbRpRw"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbly9s2AvvazNTPBc",
+          "mode": "list",
+          "cachedResultName": "Memories",
+          "cachedResultUrl": "https://airtable.com/appc4QlJGzjsbRpRw/tbly9s2AvvazNTPBc"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Clients": "={{ [$json.id ]}}",
+            "Memories": "={{ $('First Message').item.json.message.text }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "Memories",
+              "displayName": "Memories",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Clients",
+              "displayName": "Clients",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        -1728,
+        1088
+      ],
+      "id": "b23d47a1-5e45-44e6-aebe-122c8a220bc8",
+      "name": "Create New Memories"
+    },
+    {
+      "parameters": {
+        "chatId": "={{ $('First Message').first().json.message.chat.id }}",
+        "text": "={{ $json.output.output }}",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        528,
+        240
+      ],
+      "id": "cf9cb96a-b47a-48c1-aa02-c7d590bf618d",
+      "name": "Telegram2",
+      "webhookId": "8c94d518-f855-42af-a8ac-6ec772a714b8"
+    },
+    {
+      "parameters": {
+        "content": "## Ask for more information from user or update given information and update lead to enriched status",
+        "height": 620,
+        "width": 1080,
+        "color": 4
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        0,
+        0
+      ],
+      "id": "fc13f413-6943-497e-9359-955e1fd25f91",
+      "name": "Sticky Note3"
+    },
+    {
+      "parameters": {
+        "updates": [
+          "messages"
+        ],
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsAppTrigger",
+      "typeVersion": 1,
+      "position": [
+        -2896,
+        1184
+      ],
+      "id": "8faa7a09-1d2b-4b23-8c63-07f1643b2fc1",
+      "name": "WhatsApp Trigger",
+      "webhookId": "1d14d766-5fb7-4d99-821c-649f83af7579",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "sendAndWait",
+        "phoneNumberId": "630026570187605",
+        "recipientPhoneNumber": "+972525833877",
+        "options": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        -2688,
+        1184
+      ],
+      "id": "ce603978-8dd3-43d9-928c-4560ebc4259e",
+      "name": "WhatsApp Business Cloud1",
+      "webhookId": "c06f4177-38d4-4927-9860-0325421754b2",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "operation": "send",
+        "phoneNumberId": "630026570187605",
+        "recipientPhoneNumber": "00972525833877",
+        "additionalFields": {}
+      },
+      "type": "n8n-nodes-base.whatsApp",
+      "typeVersion": 1,
+      "position": [
+        -1456,
+        1200
+      ],
+      "id": "1f8f8492-be0e-43bc-96ae-cc4fb9c4452c",
+      "name": "WhatsApp Business Cloud2",
+      "webhookId": "f81ac94f-e0ec-40c7-8cd6-eb4d264e1a93",
+      "disabled": true
+    },
+    {
+      "parameters": {
+        "chatId": "595642976",
+        "text": "=Perfect, {{ $('New Lead Responded?').item.json['First Name'] }}, if you'd like to book a meeting, you can do so directly here [link]. If you have any further questions, I’m available to assist you",
+        "additionalFields": {
+          "appendAttribution": false
+        }
+      },
+      "type": "n8n-nodes-base.telegram",
+      "typeVersion": 1.2,
+      "position": [
+        432,
+        720
+      ],
+      "id": "19fc02e1-e9e1-4dd3-84a8-6ecfbc43fc01",
+      "name": "Finalize message",
+      "webhookId": "460efb75-144a-4939-92a9-cbbb90d216a4"
+    },
+    {
+      "parameters": {
+        "content": "## Handle Objectiong from the client",
+        "height": 580,
+        "width": 720,
+        "color": 3
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -16,
+        1104
+      ],
+      "id": "dad4d932-80e4-42e6-b3ad-5696cb257764",
+      "name": "Sticky Note5"
+    },
+    {
+      "parameters": {
+        "content": "## Appointment Handling",
+        "height": 420,
+        "width": 740,
+        "color": 5
+      },
+      "type": "n8n-nodes-base.stickyNote",
+      "typeVersion": 1,
+      "position": [
+        -64,
+        672
+      ],
+      "id": "72d8f7e5-190a-4bb7-942e-57c926f1dd16",
+      "name": "Sticky Note6"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appc4QlJGzjsbRpRw",
+          "mode": "list",
+          "cachedResultName": "Loic Table",
+          "cachedResultUrl": "https://airtable.com/appc4QlJGzjsbRpRw"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbldSiL36zjGDTuXW",
+          "mode": "list",
+          "cachedResultName": "Clients",
+          "cachedResultUrl": "https://airtable.com/appc4QlJGzjsbRpRw/tbldSiL36zjGDTuXW"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Age": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Age', ``, 'number') }}",
+            "Job": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Job', ``, 'string') }}",
+            "Notes": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Notes', ``, 'string') }}",
+            "id": "={{ $('Exists?').first().json.id }}",
+            "Bank/Insurance": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Bank_Insurance', ``, 'string') }}",
+            "Mortgage": "={{ /*n8n-auto-generated-fromAI-override*/ $fromAI('Mortgage', ``, 'string') }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": false
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Job",
+              "displayName": "Job",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "New",
+                  "value": "New"
+                },
+                {
+                  "name": "Waiting for response",
+                  "value": "Waiting for response"
+                },
+                {
+                  "name": "Follow-up",
+                  "value": "Follow-up"
+                },
+                {
+                  "name": "Booked",
+                  "value": "Booked"
+                },
+                {
+                  "name": "Done",
+                  "value": "Done"
+                },
+                {
+                  "name": "Enriched",
+                  "value": "Enriched"
+                },
+                {
+                  "name": "Engaged",
+                  "value": "Engaged"
+                }
+              ],
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Age",
+              "displayName": "Age",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Memory",
+              "displayName": "Memory",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Created",
+              "displayName": "Created",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Mortgage",
+              "displayName": "Mortgage",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Bank/Insurance",
+              "displayName": "Bank/Insurance",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtableTool",
+      "typeVersion": 2.1,
+      "position": [
+        384,
+        464
+      ],
+      "id": "31f7c6fd-065a-4621-bd8a-d67a3b751ed7",
+      "name": "Save Client Details"
+    },
+    {
+      "parameters": {
+        "operation": "update",
+        "base": {
+          "__rl": true,
+          "value": "appc4QlJGzjsbRpRw",
+          "mode": "list",
+          "cachedResultName": "Loic Table",
+          "cachedResultUrl": "https://airtable.com/appc4QlJGzjsbRpRw"
+        },
+        "table": {
+          "__rl": true,
+          "value": "tbldSiL36zjGDTuXW",
+          "mode": "list",
+          "cachedResultName": "Clients",
+          "cachedResultUrl": "https://airtable.com/appc4QlJGzjsbRpRw/tbldSiL36zjGDTuXW"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "Status": "Enriched",
+            "id": "={{ $('New Lead Responded?').item.json.id }}"
+          },
+          "matchingColumns": [
+            "id"
+          ],
+          "schema": [
+            {
+              "id": "id",
+              "displayName": "id",
+              "required": false,
+              "defaultMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true
+            },
+            {
+              "id": "Phone",
+              "displayName": "Phone",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "First Name",
+              "displayName": "First Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Last Name",
+              "displayName": "Last Name",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Email",
+              "displayName": "Email",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Job",
+              "displayName": "Job",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Status",
+              "displayName": "Status",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "options",
+              "options": [
+                {
+                  "name": "New",
+                  "value": "New"
+                },
+                {
+                  "name": "Waiting for response",
+                  "value": "Waiting for response"
+                },
+                {
+                  "name": "Follow-up",
+                  "value": "Follow-up"
+                },
+                {
+                  "name": "Booked",
+                  "value": "Booked"
+                },
+                {
+                  "name": "Done",
+                  "value": "Done"
+                },
+                {
+                  "name": "Enriched",
+                  "value": "Enriched"
+                },
+                {
+                  "name": "Engaged",
+                  "value": "Engaged"
+                }
+              ],
+              "readOnly": false,
+              "removed": false
+            },
+            {
+              "id": "Age",
+              "displayName": "Age",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "number",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Memory",
+              "displayName": "Memory",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "array",
+              "readOnly": false,
+              "removed": true
+            },
+            {
+              "id": "Created",
+              "displayName": "Created",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": true,
+              "removed": true
+            },
+            {
+              "id": "Notes",
+              "displayName": "Notes",
+              "required": false,
+              "defaultMatch": false,
+              "canBeUsedToMatch": true,
+              "display": true,
+              "type": "string",
+              "readOnly": false,
+              "removed": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.airtable",
+      "typeVersion": 2.1,
+      "position": [
+        928,
+        144
+      ],
+      "id": "93c93808-8ee2-46b8-8ee5-87e1a6e28c99",
+      "name": "Update Enriched Lead1"
+    },
+    {
+      "parameters": {
+        "jsonSchemaExample": "{\n\t\"output\": \"output message\",\n\t\"status\": \"Enriched\"\n}"
+      },
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.2,
+      "position": [
+        544,
+        464
+      ],
+      "id": "68129a0c-f7cc-4ba2-ad69-6e550018b659",
+      "name": "Structured Output Parser"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "ae471851-07c0-4d8a-b931-9018ac3facd2",
+              "leftValue": "={{ $('Enrichment Agent').item.json.output.status }}",
+              "rightValue": "Enriched",
+              "operator": {
+                "type": "string",
+                "operation": "equals",
+                "name": "filter.operator.equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        720,
+        240
+      ],
+      "id": "690cda7b-cb1f-4b1b-aadb-6f97dde48be1",
+      "name": "If"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('Upload Last Message').item.json.fields.Memories }}",
+        "options": {
+          "systemMessage": "=figure out from the prompt and the conversation history if the user is ready to set an appointment.\n{{ $('Aggregate').item.json.data.toJsonString() }}\n\n\noffer this message to the client:\n\nThank you for your time, {{ $('New Lead Responded?').item.json['First Name'] }}. We can now schedule a quick call to finalize the analysis and answer any remaining questions. feel free to pick a time and date from our schedule: [To be completed Calendly Link]\n\n\n\n"
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        64,
+        752
+      ],
+      "id": "33f54ba9-49d2-40e0-82f4-ab0039b963c6",
+      "name": "Calendar Agent"
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $('First Message').item.json.message.text }}",
+        "options": {
+          "systemMessage": "=You are an assistant that's an expert in Objection Handling and Nurturing leads.\n\nRespond to objections reassuringly and respectfully, while continuing to nurture the relationship.\n\nObjection 1: “I don’t have time.”\n\nAI Response: \"I completely understand, {{ $('New Lead Responded?').item.json['First Name'] }}. This process is quick and without commitment. In just a few minutes, we could check if your current contract is suited to your needs. Does that seem feasible?\"\nObjection 2: “I’m already insured elsewhere.”\n\nAI Response: \"That’s perfectly understandable, {{ $('New Lead Responded?').item.json['First Name'] }}. Many of our clients were in the same situation. But after a free analysis, they discovered that a more suitable coverage helped them better meet their needs. Would you like to check your current situation for free?\"\nObjection 3: “It’s too expensive.”\n\nAI Response: \"I understand your concerns, {{ $('New Lead Responded?').item.json['First Name'] }}. Our free analysis will let you know if your contract is well-adjusted to your current needs and if adjustments are possible. In just a few minutes, we’ll have a clearer picture.\""
+        }
+      },
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 1.8,
+      "position": [
+        64,
+        1200
+      ],
+      "id": "b6630de7-c55d-4c91-82f4-472d7f3d3015",
+      "name": "Objection Agent"
+    }
+  ],
+  "connections": {
+    "Switch": {
+      "main": [
+        [
+          {
+            "node": "Send Contact Info",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Send Greeting For Existing Leads",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Enrichment Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Calendar Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Objection Agent",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Ask for clarification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "First Message": {
+      "main": [
+        [
+          {
+            "node": "Search Existing Client",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory1": {
+      "ai_memory": [
+        [
+          {
+            "node": "Objection Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model1": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Objection Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get client first name": {
+      "ai_tool": [
+        [
+          {
+            "node": "Objection Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model2": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Calendar Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Simple Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Calendar Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Google Calendar": {
+      "ai_tool": [
+        [
+          {
+            "node": "Calendar Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create New Lead": {
+      "main": [
+        [
+          {
+            "node": "Create New Memories",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Airtable3": {
+      "ai_tool": [
+        [
+          {
+            "node": "Objection Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Categorize message": {
+      "main": [
+        [
+          {
+            "node": "Switch",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Get Memories": {
+      "main": [
+        [
+          {
+            "node": "Aggregate",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Aggregate": {
+      "main": [
+        [
+          {
+            "node": "Upload Last Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Window Buffer Memory": {
+      "ai_memory": [
+        [
+          {
+            "node": "Enrichment Agent",
+            "type": "ai_memory",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Enrichment Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Upload Last Message": {
+      "main": [
+        [
+          {
+            "node": "Categorize message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Search Existing Client": {
+      "main": [
+        [
+          {
+            "node": "Exists?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Send Second Welcome Message": {
+      "main": [
+        [
+          {
+            "node": "Engaged Lead Status",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "New Lead Responded?": {
+      "main": [
+        [
+          {
+            "node": "Send Second Welcome Message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Get Memories",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Exists?": {
+      "main": [
+        [
+          {
+            "node": "New Lead Responded?",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Create New Lead",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Enrichment Agent": {
+      "main": [
+        [
+          {
+            "node": "Telegram2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Create New Memories": {
+      "main": [
+        [
+          {
+            "node": "Send First Welcome Message1",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "WhatsApp Business Cloud2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Telegram2": {
+      "main": [
+        [
+          {
+            "node": "If",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "WhatsApp Trigger": {
+      "main": [
+        [
+          {
+            "node": "WhatsApp Business Cloud1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Save Client Details": {
+      "ai_tool": [
+        [
+          {
+            "node": "Enrichment Agent",
+            "type": "ai_tool",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Structured Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Enrichment Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "If": {
+      "main": [
+        [
+          {
+            "node": "Update Enriched Lead1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Calendar Agent": {
+      "main": [
+        [
+          {
+            "node": "Finalize message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Objection Agent": {
+      "main": [
+        [
+          {
+            "node": "Telegram1",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "pinData": {},
+  "meta": {
+    "instanceId": "20cf75cd0417fe5be3c3d8dcf7163bcd4dd5f0947193527bf3d55f850ac76577"
+  }
+}
