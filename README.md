@@ -15,3 +15,10 @@ A curated collection of reusable n8n JSON automation workflows for integrations,
 
 5. Outreach
    <img width="1665" height="382" alt="image" src="https://github.com/user-attachments/assets/6d0d04d8-1fa9-4daa-8122-f90050bc9180" />
+   
+6. Scrape web and update RAG
+   <img width="1460" height="528" alt="image" src="https://github.com/user-attachments/assets/54edb0ab-e710-4ee8-91f3-0992170e313a" />
+   
+7. Generate HTML Report from RAG
+   <img width="1625" height="698" alt="image" src="https://github.com/user-attachments/assets/9399777a-7356-4b4d-a554-d2111c9100ac" />
+
